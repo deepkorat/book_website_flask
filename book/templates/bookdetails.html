@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- Product book -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{url_for('static', filename='img/'+bookdetail.title+'.jpg')}}" style="width:500px;" alt="Product"
+                class="product-image">
+        </div>
+        <div class="col-md-6 product-details">
+            <h2>{{bookdetail.title}}</h2>
+            <p>{{bookdetail.description}}</p>
+            <h3>Price: {{bookdetail.price}}</h3>
+            <p>Available in stock</p>
+
+            <div class="card-footer">
+                <form action="{{ url_for('main.order') }}">
+                    <input type="hidden" id="book_id" name="book_id" value="{{ bookdetail.id }}">
+                    <input class="btn btn-dark" type="submit" value="Add to Basket">
+                </form>
+            </div>
+            <br><br>
+        </div>
+    </div>
+</div>
+{% endblock body %}

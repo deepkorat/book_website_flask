@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mt-5 mb-5">
+     <h2>Enter your Details:</h2>
+     <br>
+     <form action="{{url_for('main.checkout')}}" method="post">
+          <div class="form-row ">
+               <div class="form-group col-md-6">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" id="firstname" name placeholder="ex. John">
+               </div>
+          </div>
+          <div class="form-row ">
+               <div class="form-group col-md-6">
+                    <label>Surname</label>
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="ex. Doe">
+               </div>
+          </div>
+          <div class="form-row ">
+               <div class="form-group col-md-6">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="ex. johndoe@gmail.com">
+               </div>
+          </div>
+          <div class="form-row ">
+               <div class="form-group col-md-6">
+                    <label>Phone</label>
+                    <input type="phone" class="form-control" id="phone" name="phone" placeholder="ex. +61481841834">
+               </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Confirm Order</button>
+     </form>
+
+</div>
+
+
+{% endblock body %}

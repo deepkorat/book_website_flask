@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="jumbotron jumbotron-fluid" style="background-color:rgb(235, 231, 192);">
+  <div class="container">
+
+    <h1 class="display-4"><span style="text-transform:uppercase;">{{category.name}}</span></h1>
+  </div>
+</div>
+
+
+
+<!-- Fiction product  -->
+<section class="product container p-5 ">
+  <div class="card-deck">
+    <div class="row row-cols-1 row-cols-md-3">
+      {% for book in books %}
+      <div class="col mb-4">
+        <div class="card h-100">
+          <img src="{{ url_for('static', filename='img/'+book.title+'.jpg')}}" style="height:400px;"
+            class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{book.title}}</h5>
+            <p class="card-text">{{book.description}}</p>
+            <p class="card-text"><small class="text-muted">by {{book.author}}(Author)</small></p>
+          </div>
+          <div class="card-footer bg-dark text-light">
+            <h6>Price:</h6>
+            <h4>${{book.price}}</h4>
+          </div>
+          <div class="card-footer">
+            <form action="{{ url_for('main.order') }}">
+              <a href="{{url_for('main.bookdetail', book_id=book.id)}}" class="btn btn-outline-dark mt-auto"
+                target="_blank">View Book</a>
+              <input type="hidden" id="book_id" name="book_id" value="{{ book.id }}">
+              <input class="btn btn-dark" type="submit" value="Add to Basket">
+            </form>
+            <br><br>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock body %}

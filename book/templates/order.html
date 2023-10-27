@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="h5">Shopping Bag</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col"><a href="{{ url_for('main.deleteorder') }}" class="btn btn-primary">Empty Basket</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for book in order.bookdetails %}
+
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{url_for('static', filename='img/'+book.title+'.jpg')}}"
+                                            class="img-fluid rounded-3" style="width: 120px;" alt="Book">
+                                        <div class="flex-column ms-4 ml-5">
+                                            <p class="mb-2">{{book.title}}</p>
+                                            <p class="mb-0">{{book.author}}(Author)</p>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">{{book.Category.name}}</p>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-row">
+                                        <input type="text" class="form-control col-3" placeholder="1" id="inputZip">
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">${{book.price}}</p>
+                                </td>
+                                <td class="align-middle">
+                                    <!-- right column has price and delete button -->
+                                    <div class="col-sm-2">
+                                        <!-- delete item button -->
+                                        <!-- <h5>{{ "$%.2f"|format(book.price) }}</h5> -->
+                                        <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                                            <input type="hidden" id="id" name="id" value="{{book.id}}">
+                                            <input type="submit" value="Remove" class="btn btn-danger mb-3">
+                                        </form>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <!-- total price and page controls -->
+                <section>
+<!-- 
+                    <div class="row co-12 d-flex mt-2 mb-4">
+                        <a href="{{ url_for('main.deleteorder') }}" class="btn btn-primary">Empty Basket</a>
+                    </div>
+                </section> -->
+
+
+
+
+
+
+                <!-- payment card details -->
+
+                <div class="col-lg-4 col-xl-3">
+                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                        <p class="mb-2">Subtotal</p>
+                        <p class="mb-2">{{ "$%.2f"|format(total_price) }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                        <p class="mb-0">Shipping</p>
+                        <p class="mb-0">$0</p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                        <p class="mb-2">Total (tax included)</p>
+                        <p class="mb-2">{{ "$%.2f"|format(total_price) }}</p>
+                    </div>
+
+                    <button type="button" class="btn btn-dark btn-block btn-lg">
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('main.checkout') }}" class="btn btn-dark mr-4">
+                                <span>Checkout</span>
+                                <span>{{ "$%.2f"|format(total_price) }}</span>
+                            </a>
+                        </div>
+                    </button>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock body %}
