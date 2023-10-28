@@ -36,7 +36,7 @@
               Category
             </a>
             <div class="dropdown-menu">
-              {% for category in session['base_category'] %}
+              {% for category in session.get('base_category') %}
               <a class="dropdown-item"
                 href="{{ url_for('main.book', category_id = category.id) }}">{{category.name}}</a>
               {% endfor %}
