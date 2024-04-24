@@ -1,2 +1,3 @@
 # book_website_flask
-Book website implment in python flask framework using sqlalchemy.
+
+Using the Flask framework, I developed a small project for a book website and implemented its functionality with sqlalchemy database.
